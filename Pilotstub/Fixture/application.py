@@ -23,3 +23,6 @@ class Application:
 
     def destroy(self):
         self.driver.quit()
+
+    def click_OK_button_when_login_error(self):
+        self.driver.find_element(By.CLASS_NAME, "confirm").click()
