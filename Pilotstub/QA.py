@@ -77,4 +77,5 @@ def test_add_new_reservation(app):
         app.driver.find_element(By.ID, "location").click()
         app.driver.find_element(By.XPATH, "//option[contains(text(),'Loca tion')]").click()
         #app.driver.find_element(By.XPATH, "//button[contains(text(), 'Save')]").click()
+        #ddf
         time.sleep(5)
