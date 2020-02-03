@@ -1,0 +1,15 @@
+[
+  "QA.py::Test_Pilotstub::test_login_and_logout",
+  "QA.py::Test_Pilotstub::test_login_with_wrong_username",
+  "QA.py::Test_Pilotstub::test_login_wth_wrong_password",
+  "QA.py::Test_Pilotstub::test_fill_switched_username_and_password",
+  "QA.py::Test_Pilotstub::test_login_with_empty_fields",
+  "QA.py::Test_Pilotstub::test_open_aircraft_listing",
+  "QA.py::Test_Pilotstub::test_open_aircraft_listing_and_choose_aircraft",
+  "QA.py::Test_Pilotstub::test_open_reservations",
+  "QA.py::Test_Pilotstub::test_open_reservations_and_add_new",
+  "QA.py::Test_Pilotstub::test_add_new_reservation",
+  "QA.py::test_login_and_logout",
+  "QA.py::test_login_with_wrong_username",
+  "QA.py::test_add_new_reservation"
+]

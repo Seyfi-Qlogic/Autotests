@@ -1,0 +1,5 @@
+{
+  "QA.py": true,
+  "QA.py::Test_Pilotstub::test_open_aircraft_listing": true,
+  "QA.py::test_login_with_wrong_username": true
+}

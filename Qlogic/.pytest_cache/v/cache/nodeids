@@ -1,0 +1,8 @@
+[
+  "test_Qlogic.py::TestOpenProfessionalSupportSession::test_open_professional_support_section",
+  "test_Qlogic.py::TestOpenProfessionalSupportSession::test_send_quick_contact",
+  "test_Qlogic.py::TestOpenProfessionalSupportSession::test_quick_contact_empty_name_field",
+  "test_Qlogic.py::TestOpenProfessionalSupportSession::test_quick_contact_empty_email_field",
+  "test_Qlogic.py::TestOpenProfessionalSupportSession::test_quick_contact_empty_subject_field",
+  "test_Qlogic.py::TestOpenProfessionalSupportSession::test_quick_contact_fill_numbers_in_name_field"
+]
