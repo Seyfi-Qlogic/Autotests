@@ -4,7 +4,7 @@ import time
 import pytest
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function ")
 def app(request):
     fixture = Application()
     fixture.open_home_page()
