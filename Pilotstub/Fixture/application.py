@@ -15,14 +15,14 @@ class Application:
         self.driver.find_element(By.CLASS_NAME, "btn").click()      # click on login button
 
     def logout(self):
-        self.driver.find_element(By.CLASS_NAME, "hidden-sm").click()  # click on logout button
+        self.driver.find_element(By.XPATH, "//span[contains(text(),'Log out')]").click()  # click on logout button
 
     def open_home_page(self):
         self.driver.set_window_size(1920, 1080)
         self.driver.get('http://pilotstub.qlogic.io/#/login')
 
-    def destroy(self):
-        self.driver.quit()
-
     def click_OK_button_when_login_error(self):
         self.driver.find_element(By.CLASS_NAME, "confirm").click()
+
+    def destroy(self):
+        self.driver.quit()
