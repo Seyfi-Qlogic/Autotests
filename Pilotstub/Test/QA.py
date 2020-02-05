@@ -4,6 +4,10 @@ import time
 import pytest
 
 
+@pytest.fixture(scope="session")
+def init_fixture():
+    return Application()
+
 @pytest.fixture(scope="function")
 def app(request):
     fixture = Application()
