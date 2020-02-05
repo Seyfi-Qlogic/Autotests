@@ -4,7 +4,7 @@ import time
 import pytest
 
 
-@pytest.fixture(scope="function ")
+@pytest.fixture(scope="function")
 def app(request):
     fixture = Application()
     fixture.open_home_page()
@@ -33,10 +33,32 @@ def test_fill_switched_username_and_password(app):
     app.login(username='N4885L', password='max@qlogic.io')
     time.sleep(5)
 
+def test_login_with_correct_password_but_different_register(app):
+    app.login(password='n4885L')
+    time.sleep(2)
+
+def test_login_with_correct_username_but_different_register(app):
+    app.login(username='MAX@QloGic.io')
+    time.sleep(2)
 
 def test_login_with_empty_fields(app):
     app.login(username="", password="")
 
+def test_click_login_button_multiple_times(app):
+    app.login_button()
+    count = 10
+    while count > 1:
+        app.login_button()
+        count -= 1
+        time.sleep(1)
+
+def test_login_with_empty_password(app):
+    app.login(username="")
+    time.sleep(2)
+
+def test_login_with_empty_username(app):
+    app.login(password="")
+    time.sleep(2)
 
 def test_open_aircraft_listing(app):
     app.login()

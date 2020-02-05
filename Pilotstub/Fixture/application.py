@@ -24,5 +24,8 @@ class Application:
     def click_OK_button_when_login_error(self):
         self.driver.find_element(By.CLASS_NAME, "confirm").click()
 
+    def login_button(self):
+        self.driver.find_element(By.CLASS_NAME, "btn").click()
+
     def destroy(self):
         self.driver.quit()
