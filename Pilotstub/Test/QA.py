@@ -9,11 +9,10 @@ def init_fixture():
     return Application()
 
 @pytest.fixture(scope="function")
-def app(request):
-    fixture = Application()
-    fixture.open_home_page()
-    request.addfinalizer(fixture.destroy)
-    return fixture
+def app(init_fixture):
+    init_fixture.open_home_page()
+    yield init_fixture
+    init_fixture.clear()
 
 def test_login_and_logout(app):
     app.login()
