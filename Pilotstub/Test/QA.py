@@ -11,23 +11,19 @@ def app(request):
     request.addfinalizer(fixture.destroy)
     return fixture
 
-
 def test_login_and_logout(app):
     app.login()
     app.logout()
     time.sleep(2)
 
-
 def test_login_with_wrong_username(app):  # add expected result to the test
     app.login(username='test')
-    time.sleep(5)
-
+    time.sleep(2)
 
 def test_login_with_wrong_password(app):
     app.login(password='test')
     app.click_OK_button_when_login_error()
     time.sleep(2)
-
 
 def test_fill_switched_username_and_password(app):
     app.login(username='N4885L', password='max@qlogic.io')
@@ -45,11 +41,8 @@ def test_login_with_empty_fields(app):
     app.login(username="", password="")
 
 def test_click_login_button_multiple_times(app):
-    app.login_button()
-    count = 10
-    while count > 1:
+    for _ in range(11):
         app.login_button()
-        count -= 1
         time.sleep(1)
 
 def test_login_with_empty_password(app):
@@ -65,7 +58,6 @@ def test_open_aircraft_listing(app):
     app.driver.find_element(By.XPATH, "//a [@href='#/app/aircraftListing']").click()
     app.logout()
 
-
 def test_open_aircraft_listing_and_choose_aircraft(app):
     app.login()
     app.driver.find_element(By.XPATH, "//a [@href='#/app/aircraftListing']").click()
@@ -73,7 +65,6 @@ def test_open_aircraft_listing_and_choose_aircraft(app):
     app.driver.find_element(By.CLASS_NAME, "input").send_keys("t")
     app.driver.find_element(By.XPATH, "//a [@href='javascript:void(0)']").click()
     app.logout()
-
 
 def test_open_reservations(app):
     app.login()
