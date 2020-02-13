@@ -19,12 +19,14 @@ def app(init_fixture):
 def test_login_and_logout(app):
     app.login()
     app.logout()
-    time.sleep(2)
-
+    time.sleep(1)
+    #Actualtext = driver.find_element(By.CLASS_NAME, "btn").getText()
+    assert "Login" in app.driver.title
 
 def test_login_with_wrong_username(app):  # add expected result to the test
     app.login(username='test')
     time.sleep(2)
+
 
 
 def test_login_with_wrong_password(app):

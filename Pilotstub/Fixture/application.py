@@ -1,14 +1,20 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
-
 
 class Application:
 
-    def __init__(self):
-        self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+    def __init__(self, browser="chrome"):
+        if browser == "chrome":
+            self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+        elif browser == "firefox":
+            self.driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        else:
+            raise ValueError("Unrecognized browser" % browser)
         self.driver.implicitly_wait(10)
         self.driver.set_window_size(1920, 1080)
+
 
     def login(self, username="max@qlogic.io", password='N4885L'):
         self.driver.find_element(By.NAME, 'email').click()
