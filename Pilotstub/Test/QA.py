@@ -23,57 +23,74 @@ def test_login_and_logout(app):
     #Actualtext = driver.find_element(By.CLASS_NAME, "btn").getText()
     assert "Login" in app.driver.title
 
-def test_login_with_wrong_username(app):  # add expected result to the test
-    app.login(username='test')
-    time.sleep(2)
 
+def test_login_with_wrong_username_format(app):
+    app.login(username='test')
+    redframe = app.driver.find_element(By.CLASS_NAME, 'ng-dirty')
+    assert redframe.is_displayed()
+
+
+def test_login_with_wrong_username(app):
+    app.login(username='test@mail.com')
+    loginerror = app.driver.find_element(By.CLASS_NAME, 'confirm')
+    assert loginerror.is_displayed()
 
 
 def test_login_with_wrong_password(app):
     app.login(password='test')
     app.click_OK_button_when_login_error()
-    time.sleep(2)
+    loginerror = app.driver.find_element(By.CLASS_NAME, 'confirm')
+    assert loginerror.is_displayed()
 
 
 def test_fill_switched_username_and_password(app):
     app.login(username='N4885L', password='max@qlogic.io')
-    time.sleep(2)
+    redframe = app.driver.find_element(By.CLASS_NAME, 'ng-dirty')
+    assert redframe.is_displayed()
 
 
 def test_login_with_correct_password_but_different_register(app):
     app.login(password='n4885L')
-    time.sleep(2)
+    loginerror = app.driver.find_element(By.CLASS_NAME, 'confirm')
+    assert loginerror.is_displayed()
 
 
 def test_login_with_correct_username_but_different_register(app):
     app.login(username='MAX@QloGic.io')
-    time.sleep(2)
+    userdisplay = app.driver.find_element(By.XPATH, "//strong[@class='font-bold ng-binding']")
+    assert userdisplay.is_displayed()
 
 
 def test_login_with_empty_fields(app):
     app.login(username="", password="")
+    loginerror = app.driver.find_element(By.CLASS_NAME, 'confirm')
+    assert loginerror.is_displayed()
 
 
 def test_click_login_button_multiple_times(app):
     for _ in range(11):
         app.login_button()
-        time.sleep(1)
+        assert "Login" in app.driver.title
 
 
 def test_login_with_empty_password(app):
-    app.login(username="")
-    time.sleep(2)
+    app.login(password="")
+    redframe = app.driver.find_element(By.CLASS_NAME, 'ng-dirty')
+    assert redframe.is_displayed()
 
 
 def test_login_with_empty_username(app):
-    app.login(password="")
-    time.sleep(2)
+    app.login(username="")
+    redframe = app.driver.find_element(By.CLASS_NAME, 'ng-dirty')
+    assert redframe.is_displayed()
 
 
 def test_open_aircraft_listing(app):
     app.login()
     app.driver.find_element(By.XPATH, "//a [@href='#/app/aircraftListing']").click()
-    app.logout()
+    #app.logout()
+    airlisting = app.driver.find_element(By.XPATH, "//h5[contains(text(),'Aircraft Listing')]")
+    assert airlisting.is_displayed()
 
 
 def test_open_aircraft_listing_and_choose_aircraft(app):
@@ -81,8 +98,9 @@ def test_open_aircraft_listing_and_choose_aircraft(app):
     app.driver.find_element(By.XPATH, "//a [@href='#/app/aircraftListing']").click()
     app.driver.find_element(By.CLASS_NAME, "input").click()
     app.driver.find_element(By.CLASS_NAME, "input").send_keys("t")
-    app.driver.find_element(By.XPATH, "//a [@href='javascript:void(0)']").click()
-    app.logout()
+    app.driver.find_element(By.XPATH, "//div[@class='ibox-content']//div[2]//div[1]//a[1]//img[1]").click()
+    #aircraft = app.driver.find_element(By.XPATH, "//div[@class='container_view col-md-12']//div[1]//div[2]//h4[1]")
+    #assert aircraft.is_displayed()
 
 
 def test_open_reservations(app):
