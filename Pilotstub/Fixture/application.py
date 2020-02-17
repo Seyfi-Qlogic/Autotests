@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
 
+
 class Application:
 
     def __init__(self, browser="chrome"):
@@ -15,13 +16,12 @@ class Application:
         self.driver.implicitly_wait(10)
         self.driver.set_window_size(1920, 1080)
 
-
     def login(self, username="max@qlogic.io", password='N4885L'):
         self.driver.find_element(By.NAME, 'email').click()
         self.driver.find_element(By.NAME, 'email').send_keys(username)
         self.driver.find_element(By.NAME, 'password').click()
         self.driver.find_element(By.NAME, 'password').send_keys(password)
-        self.driver.find_element(By.CLASS_NAME, "btn").click()      # click on login button
+        self.driver.find_element(By.CLASS_NAME, "btn").click()  # click on login button
 
     def logout(self):
         self.driver.find_element(By.XPATH, "//span[contains(text(),'Log out')]").click()  # click on logout button
