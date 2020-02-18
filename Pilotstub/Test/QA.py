@@ -20,7 +20,6 @@ def test_login_and_logout(app):
     app.login()
     app.logout()
     time.sleep(1)
-    # Actualtext = driver.find_element(By.CLASS_NAME, "btn").getText()
     assert "Login" in app.driver.title
 
 
@@ -99,12 +98,6 @@ def test_login_with_space_before_and_after_username(app):
     assert userdisplay.is_displayed()
 
 
-def test_login_with_space_before_and_after_password(app):
-    app.login(password=" N4885L ")
-    userdisplay = app.driver.find_element(By.XPATH, "//strong[@class='font-bold ng-binding']")
-    assert userdisplay.is_displayed()
-
-
 def test_open_aircraft_listing(app):
     app.login()
     app.driver.find_element(By.XPATH, "//a [@href='#/app/aircraftListing']").click()
@@ -152,23 +145,29 @@ def test_add_new_reservation(app):  # test is not finished
     # app.driver.find_element(By.XPATH, "//button[contains(text(), 'Save')]").click()
 
 
-def test_enter_end_date_lower_than_start_date(app):
+def test_enter_end_time_lower_than_start_time(app):
     app.login()
     app.driver.find_element(By.CLASS_NAME, "add-new-button").click()
     time.sleep(1)
+    # choose activity
     app.driver.find_element(By.NAME, "activity").click()
     app.driver.find_element(By.XPATH, "//option[contains(text(),'Dual Training')]").click()
+    # choose start time
     app.driver.find_element(By.ID, 'StartTime').click()
     app.driver.find_element(By.XPATH, "//select[@id='StartTime']//option[contains(text(),'11:30 AM')]").click()
+    # choose end time
     app.driver.find_element(By.ID, 'EndTime').click()
     app.driver.find_element(By.XPATH, "//select[@id='EndTime']//option[contains(text(),'12:00 AM')]").click()
+    # enter displayName
     app.driver.find_element(By.NAME, 'displayname').send_keys("Display here")
+    # choose aircraft
     app.driver.find_element(By.XPATH,
                             "//div[@class='col-lg-12 reccuringArea']//div[@class='col-lg-4 controlTopMargin "
                             "ng-scope']//select[@id='Registration/Tail']").click()
     app.driver.find_element(By.XPATH,
                             "//div[@class='col-lg-12 reccuringArea']//div[@class='col-lg-4 controlTopMargin "
                             "ng-scope']//option[contains(text(),'Test Test - Test')]").click()
+    # click Save button
     app.driver.find_element(By.XPATH, "//button[contains(text(), 'Save')]").click()
     alert = app.driver.find_element(By.XPATH,
                                     "//p[contains(text(),'End date & time must be greater than start date &')]")
@@ -179,30 +178,73 @@ def test_enter_end_date_lower_than_start_date_with_recurring_schedule(app):
     app.login()
     app.driver.find_element(By.CLASS_NAME, "add-new-button").click()
     time.sleep(1)
+    # click on checkbox "recurring schedule"
     app.driver.find_element(By.XPATH,
                             "//div[@class='col-lg-3 recurring-checkbox']//ins[@class='iCheck-helper']").click()
+    # choose start date and end date
     app.driver.find_element(By.XPATH, "//input[@id='datepicker']").click()
     app.driver.find_element(By.XPATH, "//select[@class='ui-datepicker-year']").click()
     app.driver.find_element(By.XPATH, "//option[contains(text(),'2025')]").click()
     app.driver.find_element(By.XPATH, "//select[@class='ui-datepicker-month']").click()
     app.driver.find_element(By.XPATH, "//option[contains(text(),'Dec')]").click()
     app.driver.find_element(By.XPATH, "//a[@class='ui-state-default'][contains(text(),'31')]").click()
-    #app.driver.find_element(By.XPATH, "//input[@id='dp1581944134461']").click()
-    #app.driver.find_element(By.XPATH, "//a[@class='ui-state-default'][contains(text(),'31')]").click()
+    # choose activity
     app.driver.find_element(By.NAME, "activity").click()
     app.driver.find_element(By.XPATH, "//option[contains(text(),'Dual Training')]").click()
+    # choose start time
     app.driver.find_element(By.ID, 'StartTime').click()
     app.driver.find_element(By.XPATH, "//select[@id='StartTime']//option[contains(text(),'11:30 AM')]").click()
+    # choose end time
     app.driver.find_element(By.ID, 'EndTime').click()
     app.driver.find_element(By.XPATH, "//select[@id='EndTime']//option[contains(text(),'12:00 AM')]").click()
-    app.driver.find_element(By.NAME, 'displayname').send_keys("Display here")
+    # enter displayName
+    app.driver.find_element(By.NAME, 'displayname').send_keys("Autotest")
+    # choose aircraft
     app.driver.find_element(By.XPATH,
                             "//div[@class='col-lg-12 reccuringArea']//div[@class='col-lg-4 controlTopMargin "
                             "ng-scope']//select[@id='Registration/Tail']").click()
     app.driver.find_element(By.XPATH,
                             "//div[@class='col-lg-12 reccuringArea']//div[@class='col-lg-4 controlTopMargin "
                             "ng-scope']//option[contains(text(),'Test Test - Test')]").click()
+    # click Save button
     app.driver.find_element(By.XPATH, "//button[contains(text(), 'Save')]").click()
     alert = app.driver.find_element(By.XPATH,
                                     "//p[contains(text(),'End date & time must be greater than start date &')]")
     assert alert.is_displayed()
+
+def test_enter_end_date_lower_than_start_date(app):
+    app.login()
+    app.driver.find_element(By.CLASS_NAME, "add-new-button").click()
+    time.sleep(1)
+    # choose start date
+    app.driver.find_element(By.XPATH, "//input[@id='datepicker']").click()
+    app.driver.find_element(By.XPATH, "//select[@class='ui-datepicker-year']").click()
+    app.driver.find_element(By.XPATH, "//option[contains(text(),'2025')]").click()
+    app.driver.find_element(By.XPATH, "//select[@class='ui-datepicker-month']").click()
+    app.driver.find_element(By.XPATH, "//option[contains(text(),'Dec')]").click()
+    app.driver.find_element(By.XPATH, "//a[@class='ui-state-default'][contains(text(),'31')]").click()
+    # choose end date
+    app.driver.find_element(By.NAME, "enddate").click()
+    app.driver.find_element(By.CLASS_NAME, "ui-datepicker-year").click()
+    app.driver.find_element(By.XPATH, "//option[contains(text(),'2020')]").click()
+    app.driver.find_element(By.CLASS_NAME, "ui-datepicker-month").click()
+    app.driver.find_element(By.XPATH, "//option[contains(text(),'Dec')]").click()
+    app.driver.find_element(By.XPATH, "//a[@class='ui-state-default'][contains(text(),'31')]").click()
+    # choose activity
+    app.driver.find_element(By.NAME, "activity").click()
+    app.driver.find_element(By.XPATH, "//option[contains(text(),'Dual Training')]").click()
+    # enter displayName
+    app.driver.find_element(By.NAME, 'displayname').send_keys("Autotest")
+    # choose aircraft
+    app.driver.find_element(By.XPATH,
+                            "//div[@class='col-lg-12 reccuringArea']//div[@class='col-lg-4 controlTopMargin "
+                            "ng-scope']//select[@id='Registration/Tail']").click()
+    app.driver.find_element(By.XPATH,
+                            "//div[@class='col-lg-12 reccuringArea']//div[@class='col-lg-4 controlTopMargin "
+                            "ng-scope']//option[contains(text(),'Test Test - Test')]").click()
+    # click Save button
+    app.driver.find_element(By.XPATH, "//button[contains(text(), 'Save')]").click()
+    alert = app.driver.find_element(By.XPATH,
+                                    "//p[contains(text(),'End date & time must be greater than start date &')]")
+    assert alert.is_displayed()
+
