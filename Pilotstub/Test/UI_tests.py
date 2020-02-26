@@ -251,9 +251,13 @@ def test_enter_end_date_lower_than_start_date(app):
 
 def test_add_new_student_and_delete(app):
     app.login()
-    app.driver.find_element(By.XPATH, "//body[@id='page-top']/div[@class='ng-scope']/div[@id='wrapper']/div[@class='ng-scope']/nav[@class='navbar-default navbar-static-side ng-scope']/div[@class='sidebar-collapse']/ul[@id='side-menu']/li[4]").click()
+    time.sleep(3)
+    # used longer href because the short one is flaky
+    app.driver.find_element(By.XPATH, "//body[@id='page-top']/div[@class='ng-scope']/div[@id='wrapper']/div["
+                                      "@class='ng-scope']/nav[@class='navbar-default navbar-static-side "
+                                      "ng-scope']/div[@class='sidebar-collapse']/ul[@id='side-menu']/li[4]").click()
     time.sleep(1)
-    app.driver.find_element(By.XPATH, "//ul[@id='People']//li[3]//a[1]").click()
+    app.driver.find_element(By.XPATH, "//span[contains(text(),'Students')]").click()
     time.sleep(1)
     app.driver.find_element(By.XPATH, "//span[contains(text(),'Add New')]").click()
     app.driver.find_element(By. NAME, "FirstName").send_keys("Auto")

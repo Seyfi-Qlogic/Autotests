@@ -11,7 +11,18 @@ def get_token():
 
 def test_get_schedules(get_token):
     response = requests.post("http://pilotstub.qlogic.io/api/api/reservation/getSchedules", headers=get_token,
-                             json={"memberID":0,"ManufacturerKey":"","AircraftKey":"","isAdmin":True,"userKey":544,"instructorID":0,"SelectedDate":"02/22/2020","FlightSchoolID":1,"onlyPeople":False,"calendarView":"agendaTwoDay","StartDateRange":"2020-02-22T15:16:24.454Z","EndDateRange":"2020-02-22T15:16:24.454Z"})
+                             json={"memberID":0,
+                                   "ManufacturerKey":"",
+                                   "AircraftKey":"",
+                                   "isAdmin":True,
+                                   "userKey":544,
+                                   "instructorID":0,
+                                   "SelectedDate":"02/22/2020",
+                                   "FlightSchoolID":1,
+                                   "onlyPeople":False,
+                                   "calendarView":"agendaTwoDay",
+                                   "StartDateRange":"2020-02-22T15:16:24.454Z",
+                                   "EndDateRange":"2020-02-22T15:16:24.454Z"})
     print(response.status_code)
     print(response.json())
 
@@ -74,3 +85,34 @@ def test_save_schedule(get_token):
 
     assert response.status_code == 200
     assert response.json() == {'Message': 'Reservation added successfully'}
+
+
+def test_add_new_instructor(get_token):
+        response = requests.post("http://pilotstub.qlogic.io/api/api/people/addNewPeople", headers=get_token,
+                                 json=[{"FirstName":"Auto",
+                                        "LastName":"Test",
+                                        "Email":"",
+                                        "SendEmailInvite":False,
+                                        "cellPhone":"444444",
+                                        "homePhone":"",
+                                        "officePhone":"",
+                                        "CanReceiveTextMessage":True,
+                                        "IsInstructor":True,
+                                        "CompanyName":"",
+                                        "Gender":"",
+                                        "DOB":None,
+                                        "Address1":"",
+                                        "Address2":"",
+                                        "City":"",
+                                        "StateID":None,
+                                        "CountryID":None,
+                                        "ZipCode":"",
+                                        "Role":"CDCAAD5C-6B77-43AD-B115-4BBE8099BE2F",
+                                        "Roles":[],
+                                        "RolesDeletes":[],
+                                        "FlightSchoolID":1,
+                                        "ByPassVerification":False,
+                                        "Password":""}])
+
+        assert response.status_code == 200
+        assert response.json() == {"Message":"Instructor added successfully"}
