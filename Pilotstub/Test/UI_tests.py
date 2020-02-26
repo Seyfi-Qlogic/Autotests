@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from Pilotstub.Fixture.application import Application
 import time
 import pytest
+import requests
 
 
 @pytest.fixture(scope="session")
@@ -141,7 +142,6 @@ def test_add_new_reservation(app):  # test is not finished
                             "//div[@class='col-lg-12 reccuringArea']//div[@class='col-lg-4 controlTopMargin "
                             "ng-scope']//option[contains(text(),'Test Test - Test')]").click()
     app.driver.find_element(By.ID, "location").click()
-    app.driver.find_element(By.XPATH, "//option[contains(text(),'Loca tion')]").click()
     # app.driver.find_element(By.XPATH, "//button[contains(text(), 'Save')]").click()
 
 
@@ -247,4 +247,18 @@ def test_enter_end_date_lower_than_start_date(app):
     alert = app.driver.find_element(By.XPATH,
                                     "//p[contains(text(),'End date & time must be greater than start date &')]")
     assert alert.is_displayed()
+
+
+def test_add_new_student_and_delete(app):
+    app.login()
+    app.driver.find_element(By.XPATH, "//body[@id='page-top']/div[@class='ng-scope']/div[@id='wrapper']/div[@class='ng-scope']/nav[@class='navbar-default navbar-static-side ng-scope']/div[@class='sidebar-collapse']/ul[@id='side-menu']/li[4]").click()
+    time.sleep(1)
+    app.driver.find_element(By.XPATH, "//ul[@id='People']//li[3]//a[1]").click()
+    time.sleep(1)
+    app.driver.find_element(By.XPATH, "//span[contains(text(),'Add New')]").click()
+    app.driver.find_element(By. NAME, "FirstName").send_keys("Auto")
+    app.driver.find_element(By.NAME, "LastName").send_keys("Test")
+    app.driver.find_element(By.NAME, "phone").send_keys("444444")
+
+    #app.driver.find_element(By.XPATH, "//button[contains(text(),'Save')]").click()
 

@@ -19,9 +19,9 @@ def test_get_schedules(get_token):
 def test_save_schedule(get_token):
     response = requests.post("http://pilotstub.qlogic.io/api/api/reservation/save", headers=get_token,
                              json=[{"ActivityName":"Dual Training",
-                                     "StartDate":"02/22/2020",
+                                     "StartDate":"03/01/2020",
                                      "StartTime":"12:00 AM",
-                                     "EndDate":"02/22/2020",
+                                     "EndDate":"03/01/2020",
                                      "EndTime":"02:00 AM",
                                      "isRecurring":False,
                                      "color":"#1E90FF",
@@ -74,5 +74,3 @@ def test_save_schedule(get_token):
 
     assert response.status_code == 200
     assert response.json() == {'Message': 'Reservation added successfully'}
-
-def
